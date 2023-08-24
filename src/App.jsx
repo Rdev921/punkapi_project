@@ -4,10 +4,10 @@ import { useState } from 'react';
 import DataCard from './components/DataCard';
 const App = () => {
   const [apidata, setApiData] = useState([]);
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
 
   // fetch dat form api
-  const getApiData = async () => {
+  const getApiData = async (page) => {
     try {
       const response = await fetch('https://api.punkapi.com/v2/beers');
       const data = await response.json();
@@ -28,7 +28,7 @@ const App = () => {
       style={{border:'1px solid lightgrey',padding:'10px',borderRadius:'10px',marginBottom:'12px'}}
         placeholder='Enter product name'
         onChange={(e) => setSearch(e.target.value)} />
-
+    <div className='container'>
       {apidata.filter((value)=>{
         if(search == " "){
           return value;
@@ -39,7 +39,7 @@ const App = () => {
       map((item) => (
         <DataCard {...item} key={item.id} />
       ))}
-
+      </div>
     </>
   )
 }
